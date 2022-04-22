@@ -1,0 +1,583 @@
+\documentclass[10pt,letterpaper,a4paper]{article}
+\usepackage[UTF8]{ctex}
+\usepackage{wacv}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float} 
+\usepackage{subfigure} 
+\usepackage{xcolor}
+\usepackage{academicons}
+\usepackage{listings}
+\usepackage[numbers, sort, comma, square]{natbib}
+\usepackage[textwidth=18.2cm,textheight=23.2cm,paperheight=29cm,footskip=1cm]{geometry}
+
+% 在hyperref之前包含其他包。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%% 重要-接下来的三行是至关重要的：
+%               (1) 请输入您的本次提案类型{proposalType}，OCT/OI/ORP/OE/OEG
+%                   '****' 这是默认填充，你可以根据此来进行编辑您的提案类型.
+%                       1.1 OCT,Openness Community 开放性研究
+%                           提案的研究结果或过程等信息
+%                       1.2 OI,Openness Idea 开放性参与
+%                           参与某一提案的内容所提交的贡献
+%                       1.3 ORP,Openness Request Proposal 请求提案
+%                           提出一个想法，尽可能的描述
+%                       1.4 OE,Openness Council 开放决策
+%                           决定某一件事的信息，一般用于 OI 所进行发布的文件
+%                       1.5 OEG，Openness Engineering Group 工程计划
+%                           ORP 所完成的计划阶段
+%               (2) 如果将取消 \openfile 注释
+%                   没有取消注释将会同按照 ORP,Openness Request Proposal 类型上传
+%                   取消了注释将会按照正式的 OE,Openness Council 类型文件上传
+%                   两者的区别在于前者是需要社区讨论的提案，而后者是已经正式实施的提案
+%               (3) OEG TEAM 分配的当前文件的页码
+%                   该提案将会在社区期刊中进行发布，你需要根据 OEG TEAM 分配给你的页面进行替换
+%                   前提是该文件已经是 openfile ，需要你取消注释。
+
+%(1)
+\def\proposalType{OEG} % **** 提案类型
+\def\submissionOrg{Openness Engineering Group(OEG)} % **** 报送组织
+\def\proposalId{255} % **** 提案编号
+\def\planProject{45646} % **** 计划项目编号
+\def\updates{\href{https://www.google.com}{2191}} % *** 更新提案
+\def\issnNumber{2070-1721} % **** ISSN 编号，最终由 OEG 颁发，在 openfile 中使用，但一般情况下在 ORP
+
+%(2)
+%\openfile % *** 类型文件公开后请取消此注释
+
+%(3)
+\ifwacvfinal
+\def\assignedStartPage{2022} % *** openfile 时的起始页，在第二阶段开始分配，第一阶段请忽略
+\fi
+
+% 如果你注释了hyperref，然后取消注释，你应该删除它
+% egpaper。备用前重新运行latex (或者只是在第一层 latex上按下“q”
+% 运行，让它结束，您应该清楚)
+\ifwacvfinal
+\usepackage[breaklinks=true,bookmarks=false]{hyperref}
+\hypersetup{
+   colorlinks=true,            %链接颜色
+   urlcolor=blue,              %网址链接
+   linkcolor=blue,             %锚(目标)文本的颜色
+   anchorcolor=blue,           %内部链接颜色
+   citecolor=blue              %参考文献引用颜色
+   pdftitle={Overleaf Example},  %设置文档标题
+   pdfpagemode=FullScreen,     %打开文件的方式
+}
+\else
+\usepackage[pagebackref=true,breaklinks=true,colorlinks=true,bookmarks=false]{hyperref}
+\hypersetup{
+   colorlinks=true,            %链接颜色
+   urlcolor=blue,              %网址链接
+   linkcolor=blue,             %锚(目标)文本的颜色
+   anchorcolor=blue,           %内部链接颜色
+   citecolor=blue              %参考文献引用颜色
+   pdftitle={Overleaf Example},  %设置文档标题
+   pdfpagemode=FullScreen,     %打开文件的方式
+}
+\fi
+
+%(4)
+% 在 openfile 模式下是会由 OEG TEAM 分配的，但默认 ORP 的页码是从 1 开始的。
+\ifwacvfinal
+\setcounter{page}{\assignedStartPage}
+\else
+% 这个是当前 ORP 模式下的页码
+\setcounter{page}{1}
+\fi
+
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+%%%%%%%%% 标题与副标题
+\title{\LaTeX\ Author Guidelines for WACV Proceedings}
+\def\subheading{你好世界} 
+\begin{document}
+
+\frontmatter
+\maketitle
+\newcommand{\orcid}[1]{\href{https://orcid.org/#1}{\textcolor[HTML]{blue}{\aiOrcid}}}
+
+%\thispagestyle{empty}
+%%%% 作者序列
+% 1) 如果是单一作者，不要注明单一的合作地址。
+% 2) 如果你需要两行或更多的author，使用\newauthor(参见下面的用法)
+% 3) 所有作者都需要 (ORCID)[https://orcid.org/]
+% 4) 短作者应该是A.U.索尔等或- A.U.索尔
+\author[F. Author et al.]{%
+First Author,$^{1}$\thanks{tjaa@tad.org.tr}\orcid{0000-0000-0000-0000}
+A. N. Other,$^{2}$\orcid{0000-0000-0000-0000}
+Third Author,$^{2,3}$\orcid{0000-0000-0000-0000}
+\newauthor
+Fourth Author$^{3}$\orcid{0000-0000-0000-0000}
+\\
+% 院校名单或作者单位、组织、团队等
+% 1) 不要把 \\ 放在最后一段中
+$^{1}$University, Department, City Post Code, Country\\
+$^{2}$Department, Institution, Street Address, City Postal Code, Country\\
+$^{3}$Another Department, Different Institution, Street Address, City Postal Code, Country%
+\vspace*{12pt}}
+
+%%%%%%%%% 抽象摘要
+\begin{abstract}
+   摘要要在顶部用斜体显示  
+   左边一栏，作者和所属机构以下  
+   信息。 使用“摘要”这个词作为标题，在12点  
+   时间，黑体字，初始时相对于列居中  
+   大写。 摘要应采用10点单行距格式。  
+   在摘要之后留下两行空白，然后开始正文。  
+   看看以前的WACV摘要，了解一下风格和长度。  
+\end{abstract}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 自动生成的内容表，数字列表和表列表 %   
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage\tableofcontents  % 目录
+% \listoffigures  % 插图目录
+% \listoftables   % 表格目录
+
+%%%%%%%%% 主要内容
+\twocolumn % 分栏
+% 对于基础的 LeTex 语法，欢迎阅读 https://en.wikibooks.org/wiki/LaTeX/Document_Structure#Sectioning_commands
+
+\begin{sloppypar}
+\section{介绍}
+\\
+请按照下面列出的步骤提交您的手稿  
+IEEE 计算机协会出版社以及 WACV 。这个
+风格指南和风格现在有几个重要的修改(例
+如，增加了更加详细的左右信息和文件作用)，
+所以所有作者  应该读一下这个新版本。  
+
+%-------------------------------------------------------------------------
+\subsection{关于语言}
+所有手稿必须是英文或中文简体、繁体的，当然
+我们也支持你在 \LaTeX 中使用相关的宏包，只
+要最后的效果能正常编译即可。
+
+对于编译，如果你对 \LaTeX 了解的并不深，建
+议在编写完 .tex 文件后，直接用\verb'latex
+mk -pdf <file.tex>' 的形式进行编译（前提
+是你已经进入到了当前的文件夹目录内）
+
+如果未使用 \href{https://www.overleaf.com/}{overleaf} 类似的这种云 \LaTeX
+环境，那么本地上请确保拥有了 \href{https://www.tug.org/texlive/}{Tex Live} 了本地的环境，
+且具有了环境变量，可以通过命令诸如 \verb'latexmk' 这种命令进行编译。
+
+当然你也可以通过 \verb'TeXworks editor' 或是 \verb'TeXstudio' 等主流针对 \LaTeX 的编辑工具
+进行写作和编译。
+
+
+\subsection{代码块}
+通常在 \LaTeX 中使用代码块可以通过 listings 
+和 xcolor 宏包进行，前者用于支持代码块，后者
+支持其代码高亮。
+\lstset{
+  language=Matlab,                                %代码语言使用的是matlab
+  keywordstyle=\color{blue!90}\bfseries,          %代码关键字的颜色为蓝色，粗体
+  commentstyle=\color{red!10!green!70}\textit,    % 设置代码注释的颜色
+  showstringspaces=false,                         %不显示代码字符串中间的空格标记
+  numbers=left,                                   % 显示行号
+  numberstyle=\footnotesize,                      % 行号字体
+  stringstyle=\ttfamily,                          % 代码字符串的特殊格式
+  breaklines=true,                                %对过长的代码自动换行
+  extendedchars=false,                            %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+% escapebegin=\begin{CJK*},escapeend=\end{CJK*},  % 代码中出现中文必须加上，否则报错
+  texcl=true
+}
+\begin{lstlisting}
+   clear;
+   clc;
+   % 此为Paper中Scetion5代码
+   % 拉普拉斯矩阵如下
+   L = [2, -1, -1;
+        0,  1, -1;
+       -1,  0,  1;];
+   % Equation 18
+   syms t;
+   R = expm(-L * t);
+   R1 = limit(R, t, inf);
+   R2 = eigenVector * lefteigenVector'; 
+\end{lstlisting}
+
+对于上述的代码块，可以在 \verb'\begin{lstlisting}' 和 
+\verb'\end{lstlisting}' 之间进行更改或添加 Code 内，
+或者使用其他方式。
+
+
+\end{lstlisting}'
+\subsection{纸的长度}
+对于提案，{\bf开放社区和联合现在均不收任何形式的版面费用，}
+对此文章的长度也页面也不会受到任何限制，在整个联合现在提供的
+服务内，{\bf均不收任何形式的额外费用}。  
+
+\\任何形式的提案，都会经过二次审核和编辑，但是在该提案一开始提
+交时，是直接呈现的，之后的任何修改都会在第一次发布的基础上进
+行更新。
+
+%-------------------------------------------------------------------------
+\subsection{标尺}
+\LaTeX\ 样式定义了一个打印的标尺，它应该出现在
+提交审核的版本。 提供标尺是为了
+审稿人可以对提案中的特定行发表评论，而无需
+迂回曲折。 如果您正在使用非 \LaTeX\
+文件准备系统，请安排一个等效的尺子
+出现在最终输出页面上。
+
+尺子的存在与否
+不应更改页面上任何其他内容的外观。 这
+相机准备好的副本不应包含标尺。 (\LaTeX\ 用户可以取消注释
+文档序言中的\verb'\openfile'命令。）\\审稿人：
+请注意，标尺测量值与纸张中的线条不对齐
+--- 事实证明，当论文包含
+许多数字和方程式，完成后看起来很难看。 只需使用小数
+参考文献（例如\这一行是 $087.5$），尽管在大多数情况下会
+预计大致位置就足够了。
+
+对于标尺，他只出现在开放社区提案中，以及大会
+(Openness Council) 的讨论，在此之后的发布将
+会通过此命令取消标尺和页头信息。
+%-------------------------------------------------------------------------
+
+\subsection{页头信息}
+\verb'\submissionOrg' 是提案需要发送的组织机构，通常是联合现在的相
+关体系结构团队。\verb'\proposalId' 是当前提案的编号，可以留空等待 OEG
+进行分配。
+
+\verb'\proposalType' 是当前提案的类型，一般填缩写，可以参考 .tex 文件的
+开头注释。\verb'\updates' 当前提案所更新、跟进的提案内容，直接应用其提案
+编号即可。
+
+\verb'\planProject' 为某个项目提交提案，那么该提案将会默认归类到该项目提
+案内。
+
+\verb'\issnNumber' 即当前 ISSN 的编码，通常由OEG在大会发布后进行颁发
+但通常在会议结束后通过期刊统一发布。
+
+\subsection{数学}
+请给你所有的部分和显示的方程式编号。 这是
+重要的是读者能够参考任何特定的方程式。 只是
+因为你没有在文中提到它并不意味着未来的读者
+可能不需要参考它。 必须使用很麻烦
+像“第 3 页顶部第二个等式”这样的迂回说法
+1''。 （请注意，尺子不会出现在最终副本中，因此
+等式编号的替代方案）。 所有作者都将从阅读中受益
+Mermin 对如何写数学的描述。
+
+\subsection{盲审}
+许多作者误解了盲人匿名化的概念
+审查。 盲审并不意味着必须删除
+对自己作品的引用——事实上，通常不可能
+审阅一篇论文，除非之前的引用是已知的，并且
+可用的。
+
+盲审意味着您不使用“我的”或“我们的”这些词
+引用以前的工作时。 就这些。 （但见下文
+技术报告。）
+
+说“这建立在露西·史密斯 [1] 的工作之上”并不是说
+你是露西·史密斯； 它说你在她的基础上
+工作。 如果你是史密斯和琼斯，不要说“正如我们在
+[7]''，说“正如史密斯和琼斯在 [7] 中展示的那样”，并在结尾处
+论文，包括参考文献 7，就像任何其他引用的作品一样。
+
+只要求被拒绝的糟糕论文的示例：
+\begin{quote}
+\begin{center}
+   对 frobnicable foo 过滤器的分析。
+\end{center}
+
+在本文中，我们对我们的性能进行了分析
+    以前的论文 [1]，并表明它不如所有
+    以前已知的方法。 为什么上一篇论文是
+    接受没有这种分析是超出我的。
+
+    [1] 删除以进行盲审
+\end{quote}
+
+
+可接受论文的示例：
+
+\begin{quote}
+\begin{center}
+   对 frobnicable foo 过滤器的分析。
+\end{center}
+
+在本文中，我们将介绍性能分析
+    Smith \ etal [1] 的论文，并证明它不如
+    所有以前已知的方法。 为什么上一篇论文
+    没有这个分析就被接受了，这超出了我的理解。
+
+    [1] Smith, L and Jones, C. ``The frobnicatable foo
+    filter, a fundamental contribution to human knowledge''.
+    Nature 381(12), 1-213.
+\end{quote}
+
+如果您同时提交给另一个会议，
+涵盖类似或重叠的材料，您可能需要参考
+提交以解释差异，就像您将
+之前发表过相关作品。 在这种情况下，包括
+匿名并行提交~\cite{Authors20} 作为附加材料和
+引用它作为
+\begin{quote}
+[1] Authors. ``The frobnicatable foo filter'', F\&G 2020 Submission ID 324,
+作为附加材料提供
+\end{quote}
+
+最后，你可能觉得需要告诉读者更多细节可以
+在其他地方找到，并将其提交给技术报告。 会议用
+提交，论文必须独立，而不是 {\em 要求}
+审阅者前往技术报告了解更多详情。 因此，你可以说
+论文正文``可以找到更多细节
+在~\cite{Authors20b}''。 然后提交技术报告作为附加材料。
+同样，您可能不会认为审稿人会阅读此材料。
+
+有时你的论文是关于你使用工具测试的问题
+众所周知，它仅限于单一机构。 例如，
+假设是 1969 年，你解决了阿波罗着陆器上的一个关键问题，
+并且您认为 WACV 70 的观众希望了解您的
+解决方案。 这项工作是您 1968 年著名论文的发展，题为
+``零-g frobnication：如何成为世界上唯一可以访问的人
+阿波罗着陆器源代码让我们在派对上惊叹不已，作者 Zeus \etal。
+
+您可以像处理其他任何文件一样处理此文件。 不要写“我们展示如何
+改进我们以前的工作 [Anonymous, 1968]。 这次我们测试了
+月球着陆器上的算法[着陆器名称已删除以进行盲审]''。
+那将是愚蠢的，并且会立即确定作者。 反而
+写下：
+\begin{quotation}
+\noindent
+我们描述了一个零重力摩擦系统。 这
+    system 是新的，因为它处理以下情况：
+    A, B. 以前的系统 [Zeus et al. 1968]没有
+    妥善处理案例 B。 我们的处理方法包括
+    bar 积分中的 foo 项。
+
+    ...
+
+    拟议的系统与阿波罗集成
+    登月器，一路去月球，不要
+    你知道。 它显示了以下行为
+    这表明我们解决案例 A 和 B 的效果如何： ...
+\end{quotation}
+如您所见，上面的文字遵循标准的科学惯例，
+读起来比第一个版本好，并且没有明确地将您命名为
+作者。 审稿人可能认为新论文很可能是
+由 Zeus \etal 编写，但无法根据该猜测做出任何决定。
+他或她必须确保没有其他作者可以
+签约解决问题 B.
+\medskip
+
+\noindent
+FAQ\medskip\\
+{\bf Q:} 确认可以吗？\\
+{\bf A:} 不，将它们留作最终副本。\medskip\\
+{\bf Q:} 我如何引用我在公开挑战中报告的结果？
+{\bf A:} 为了符合双盲评审政策，您可以在论文中报告
+其他挑战参与者的结果以及您的结果。 但是，对于您的
+结果，您不应该表明自己的身份，也不应该提及您参与了
+挑战。 而是参考您论文中提出的方法提出您的结果，并
+根据与其他结果的实验比较得出结论。\medskip\\
+\begin{figure}[t]
+\begin{center}
+\fbox{\rule{0pt}{2in} \rule{0.9\linewidth}{0pt}}
+   %\includegraphics[width=0.8\linewidth]{egfigure.eps}
+\end{center}
+   \caption{Example of caption.  It is set in Roman so that mathematics
+   (always set in Roman: $B \sin A = A \sin B$) may be included without an
+   ugly clash.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+
+\subsection{各种各样的}
+\noindent
+比较以下内容：\\
+\begin{tabular}{ll}
+ \verb'$conf_a$' &  $conf_a$ \\
+ \verb'$\mathit{conf}_a$' & $\mathit{conf}_a$
+\end{tabular}\\
+参见 The \TeX book, p165。
+
+\eg 之后的空格，意思是“例如”，不应该是
+句尾空格。 所以 \eg 是正确的， {\em e.g.} 不是。 提供的
+\verb'\eg' 宏负责这一点。
+
+引用多位作者的论文时，您可以使用 ``et alia'' 来节省空间，
+缩写为 ``\etal'' （不是 ``{\em et.\ al.}'' 因为 ``{\em et}'' 是一个完整的词。）
+但是，仅当有三个或更多作者时才使用它。 就这样
+以下是正确的：``
+    Frobnication最近很流行。
+    它由 Alpher~\cite{Alpher02} 引入，随后由
+    Alpher 和 Fotheringham-Smythe~\cite{Alpher03}，以及 Alpher \etal~\cite{Alpher04}。''
+
+这是不正确的：``... 随后由 Alpher \etal~\cite{Alpher03} 开发...''
+因为reference~\cite{Alpher03} 只有两个作者。 如果您使用
+提供了 \verb'\etal' 宏，那么你不必担心双句号
+用在句子的结尾时，如在 Alpher \etal 中。
+
+对于这种引文风格，以数字形式保留多个引文（不是
+按时间顺序），所以更喜欢 \cite{Alpher03,Alpher02,Authors20}
+\引用{Alpher02，Alpher03，Authors20}。
+
+
+\begin{figure*}
+\begin{center}
+\fbox{\rule{0pt}{2in} \rule{.9\linewidth}{0pt}}
+\end{center}
+   \caption{Example of a short caption, which should be centered.}
+\label{fig:short}
+\end{figure*}
+
+%------------------------------------------------------------------------
+\section{格式化你的论文}
+所有文本必须采用两列格式。 总允许宽度
+文本区域是 $6\frac78$ 英寸（17.5 厘米）宽$8\frac78$ 英寸（22.54
+厘米）高。 列是$3\frac14$ 英寸（8.25 厘米）宽，带有
+$\frac{5}{16}$ 英寸（0.8 厘米）的空间。 主标题（在
+第一页）应从距页面顶部边缘 1.0 英寸（2.54 厘米）处开始
+页。 第二页及后续页面应从距 1.0 英寸（2.54 厘米）开始
+顶部边缘。 在所有页面上，下边距应为 1-1/8 英寸（2.86
+厘米）从页面的底部边缘 $8.5 \times 11$-英寸纸； 适用于 A4
+纸，距离纸张底部边缘约 1-5/8 英寸（4.13 厘米）
+页。
+
+%-------------------------------------------------------------------------
+\subsection{页边距和页码}
+
+必须保留所有印刷材料，包括文本、插图和图表
+在 6-7/8 英寸（17.5 厘米）宽 x 8-7/8 英寸（22.54 厘米）的打印区域内
+高的。
+
+页码应与页码放在页脚中，居中且 0.75
+距离页面底部英寸，并使其从正确的页面开始
+数字而不是示例中的 9876。 为此，请找到 secounter
+行（在此文件中的第 33 行附近）并将页码更新为
+\begin{verbatim}
+\setcounter{page}{123}
+\end{verbatim}
+其中数字 123 是您分配的起始页。
+
+%-------------------------------------------------------------------------
+\subsection{类型样式和字体}
+在指定 Times 的地方，也可以使用 Times Roman。如果两者都不是
+在您的文字处理器上可用，请使用最接近的字体
+出现在您有权访问的时代。
+
+主题。将标题居中距顶部边缘 1-3/8 英寸（3.49 厘米）
+第一页。标题应为 Times 14 点黑体字。
+名词、代词、动词、形容词的首字母大写
+副词;不要大写冠词、并列连词或
+介词（除非标题以这样的词开头）。留两个空白
+标题后的行。
+
+AUTHOR NAME(s) 和 AFFILIATION(s) 将在标题下方居中
+并以 Times 12 点非粗体字印刷。该信息是
+后跟两个空行。
+
+ABSTRACT 和 MAIN TEXT 将采用两列格式。
+
+正文。在 10 点 Times 中键入正文，单行距。不使用
+双间距。所有段落应缩进 1 pica（约 1/6
+英寸或 0.422 厘米）。确保你的文字是完全合理的——也就是说，
+向左冲洗和向右冲洗。请不要放置任何额外的空白
+段落之间的线条。
+
+图和表格标题应为 9 点罗马字体，如
+图~\ref{fig:onecol} 和~\ref{fig:short}。短标题应居中。
+
+\noindent 标注应该是 9 点 Helvetica，非粗体类型。
+最初只大写章节标题的第一个单词和第一个，
+二级和三级标题。
+
+一阶标题。 （例如，{\large \bf 1. Introduction}）
+应该是 Times 12 号粗体，首字母大写，左对齐，
+前一空行，后一空行。
+
+二阶标题。 （例如，{ \bf 1.1. 数据库元素}）
+应该是 Times 11 号黑体，首字母大写，左对齐，
+前一空行，后一空行。如果您需要三阶
+标题（我们不鼓励），最初使用 10 点 Times，粗体字
+大写，左对齐，前面有一个空行，后面是一个句点
+和你的文字在同一行。
+
+%-------------------------------------------------------------------------
+\subsection{脚注}
+请使用脚注\footnote {这是脚注的样子。 它
+经常会分散读者对论点的注意力。} 谨慎。
+确实，尽量避免使用脚注，并包括必要的外围设备
+中的观察
+文本（在括号内，如果您愿意，如本句所示）。 如果你
+希望使用脚注，请将其放在页面上的列底部
+它被引用。 使用 Times 8 点类型，单行距。
+
+%-------------------------------------------------------------------------
+\subsection{参考}
+列出并编号 9 点时代的所有参考书目，
+单行距，在论文的末尾。 文中提及时，
+将引文编号括在方括号中，对于
+示例~\citet{Authors20}。 在适当的情况下，包括
+参考书籍的编辑。
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+Method & Frobnability \\
+\hline\hline
+Theirs & Frumpy \\
+Yours & Frobbly \\
+Ours & Makes one's heart Frob\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Results.   Ours is better.}
+\end{table}
+
+%-------------------------------------------------------------------------
+\subsection{插图、图表和照片}
+所有图形都应居中。 请确保您希望的任何点
+make 可以在纸张的打印副本中解析。 调整图形中的字体大小
+匹配正文中的字体，并选择渲染的线宽
+有效地印刷。 许多读者（和评论者），甚至是电子版的
+副本，将选择打印您的论文以便阅读。 你不能
+坚持他们不这样做，因此不能假设他们可以
+放大以查看图形上的微小细节。
+
+在 \LaTeX 中放置图形时，几乎总是最好使用
+includegraphics，并将图形宽度指定为的倍数
+线宽如下例所示
+{\small\begin{verbatim}
+   \usepackage[dvips]{graphicx} ...
+   \includegraphics[width=0.8\linewidth]
+                   {myfile.eps}
+\end{verbatim}
+}
+
+
+%-------------------------------------------------------------------------
+\subsection{颜色}
+请参考 WACV 2023 网页上的作者指南有关在文档中使用颜色的讨论。(\url{http://wacv2023.thecvf.com/submission/})
+
+%------------------------------------------------------------------------
+\section{最终副本}
+提交时必须附上已签署的 IEEE 版权发布表
+你完成的论文。 我们必须在您的论文被提交之前拥有此表格
+在议事录中公布。
+
+如有任何问题，请咨询负责这些的制作编辑
+IEEE 计算机学会出版社的会议记录：
+\url{https://www.computer.org/about/contact}。
+
+
+{\small
+\bibliographystyle{unsrtnat}
+\bibliography{egbib}
+}
+\begin{sloppypar}
+\end{document}
